@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Document</title>
+        
+        <style>
+            *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+.hero{
+    height:100%;
+    width:100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(static\bg2.jpeg);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+}
+.form-box{
+    width: 380px;
+    height: 480px;
+    position:relative;
+    margin: 6% auto;
+    background: white;
+    padding: 5px;
+    border-radius: 6px;
+    overflow: hidden;
+    color:white;
+
+}
+.button-box{
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #0c85e93d;
+    border-radius: 30px;
+}
+.toggle-btn{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+
+
+}
+#btn{
+    top:0;
+    left:0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(to right,rgb(65, 150, 235),rgb(2,38,105));
+    border-radius: 30px;
+    transition: .5s;
+}
+.social{
+    margin: 30px auto;    
+    text-align:center;
+}
+.social img{
+    width : 30px;
+    margin: 0 12px;
+    box-shadow: 0 0 20px 0 #0c85e93d;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.input-group{
+    top:180px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+.input-field{
+    width:100%;
+    padding:10px 0 ;
+    margin: 5px 5px;
+    border-top: 0;
+    border-left:0 ;
+    border-right: 0;
+    border-bottom: 1px solid rgb(177, 177, 238);
+    outline: none;
+    color:black;
+    background: transparent;
+
+}
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    background:linear-gradient(to right,rgb(65,150,235),rgb(2, 38, 105)); 
+    border:0;
+    outline: none;
+    border-radius: 13px;
+    
+
+}
+::placeholder{
+    color:rgb(97, 152, 202);
+}
+span{
+    color:#777;
+    font-size: 12px;
+    bottom:68px;
+    position: absolute;
+}
+#donor{
+    left:50px;
+    
+
+
+}
+#reci{
+    left:450px;
+}
+        </style>
+
+    </head>
+
+<body style="background-image: url(static\bg2.jpeg);background-size:cover">
+{{request.user}}
+    <div class = "hero">
+<div class="form-box">
+    <div class = "button-box">
+        <div id = "btn"></div>
+            <button type="button" class = "toggle-btn" id = "one" style ="color:white;" onclick="donor()">Donor</button>
+            <button type="button" class = "toggle-btn" id = "two" style="color:black;" onclick="reci()">Recipient</button>
+        </div>
+        
+        <p style="color:rgb(21,59,97);text-align: center;padding: 0 10%;"><strong>Welcome to our website , we will be happy to help you.</strong></p>
+        <form class = "input-group" id = "donor" method="post" action="/thanks.html">
+        {%csrf_token%}
+            <input type="text" class="input-field" placeholder="Requirement: e.g. Oxygen,Food,Beds" required>
+            <input type="text" class="input-field" placeholder="Quantity: e.g. One,Two" required>
+            <button type="submit" class="submit-btn" style="color: white;">Log in</button>
+            <button type="submit" class="submit-btn" style="color: white;decoration: none;"><a href="/logout" style="color: white;text-decoration: none;">Logout</a></button>
+        </form>
+        <form class = "input-group" id = "reci" method="post" action="/thanks.html" >
+        {%csrf_token%}
+            <input type="text" class="input-field" placeholder="Requirement: e.g. Oxygen,Food,Beds" required><br>
+            <input type="text" class="input-field" placeholder="Quantity: e.g. One,Two" required><br><br>
+            <button type="submit" class="submit-btn" style = "color: white;">Log in</button>
+            <button type="submit" class="submit-btn" style="color: white;decoration: none;"><a href="/logout" style="color: white;text-decoration: none;">Logout</a></button>
+        </form>
+</div>
+
+    </div>
+    <script>
+        var x = document.getElementById("donor");
+        var y = document.getElementById("reci");
+        var z = document.getElementById("btn");
+        var a = document.getElementById("one");
+        var b = document.getElementById("two")
+        function reci(){
+            x.style.left = "-400px";
+            y.style.left = "50px";
+            z.style.left = "110px";
+            a.style.color = "rgb(21,59,97)";
+            b.style.color = "white";
+        }
+        function donor(){
+            x.style.left = "50px";
+            y.style.left = "450px";
+            z.style.left = "0px";
+            b.style.color = "rgb(21,59,97)";
+            a.style.color = "white";
+        }
+        
+    </script>
+    
+</body>
+</html>
